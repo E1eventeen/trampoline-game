@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmu7mqokxysoj"]
+
+[ext_resource type="Texture2D" uid="uid://da2rscvougrvn" path="res://Nodes/Backdrop/backdrop.png" id="1_wyqlh"]
+
+[node name="Background" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_wyqlh")
+stretch_mode = 1

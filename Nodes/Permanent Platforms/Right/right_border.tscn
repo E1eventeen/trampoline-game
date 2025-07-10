@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://ckx7qp7cy8p20"]
+
+[ext_resource type="Texture2D" uid="uid://cxvmjt4ih3kx4" path="res://Nodes/Permanent Platforms/Right/right_bottom.png" id="1_71yfm"]
+[ext_resource type="Script" path="res://Nodes/Permanent Platforms/Right/right_border.gd" id="1_tbplp"]
+[ext_resource type="Texture2D" uid="uid://c3har5h7x6edd" path="res://Nodes/Permanent Platforms/Right/right_empty.png" id="2_nphsg"]
+[ext_resource type="Texture2D" uid="uid://bcbx6g3wvekjn" path="res://Nodes/Permanent Platforms/Right/right_top.png" id="3_ok6sj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n7oyf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_71yfm")
+}],
+"loop": true,
+"name": &"bottom",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_nphsg")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ok6sj")
+}],
+"loop": true,
+"name": &"top",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51wu5"]
+size = Vector2(177, 455.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_isyr2"]
+size = Vector2(177, 465)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mb2l5"]
+size = Vector2(177.75, 528)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ic3xd"]
+size = Vector2(177, 952)
+
+[node name="Right Border" type="StaticBody2D" node_paths=PackedStringArray("c_top", "c_bottom")]
+script = ExtResource("1_tbplp")
+c_top = NodePath("Top Opening")
+c_bottom = NodePath("Bottom Opening")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_n7oyf")
+animation = &"bottom"
+centered = false
+
+[node name="Top Opening" type="CollisionShape2D" parent="."]
+position = Vector2(991.5, 227.75)
+shape = SubResource("RectangleShape2D_51wu5")
+debug_color = Color(0.615778, 0.439001, 0.802543, 0.42)
+
+[node name="Bottom Opening" type="CollisionShape2D" parent="."]
+position = Vector2(991.5, 1215.5)
+shape = SubResource("RectangleShape2D_isyr2")
+debug_color = Color(0.615778, 0.439001, 0.802543, 0.42)
+
+[node name="Top Bar" type="CollisionShape2D" parent="."]
+position = Vector2(991.875, 719)
+shape = SubResource("RectangleShape2D_mb2l5")
+
+[node name="Bottom Bar" type="CollisionShape2D" parent="."]
+position = Vector2(991.5, 1924)
+shape = SubResource("RectangleShape2D_ic3xd")

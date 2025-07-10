@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://4yhik3yjqqe4"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pfbap"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gqtrx"]
+radius = 25.0
+
+[node name="test wall" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_pfbap")
+gravity_scale = 0.0
+freeze = true
+contact_monitor = true
+
+[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D"]
+polygon = PackedVector2Array(18, 17, 0, 25, -18, 18, -25, 0, -18, -18, 0, -25, 17, -18, 25, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CircleShape2D_gqtrx")

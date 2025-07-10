@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cr7c4qfgt0fet"]
+
+[ext_resource type="Script" path="res://Nodes/Trampoline/trampoline.gd" id="1_h7elp"]
+[ext_resource type="Texture2D" uid="uid://da68udwe562vl" path="res://Nodes/Trampoline/trampoline.png" id="2_0vcwi"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_78cu5"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_jv1jr"]
+resource_local_to_scene = true
+b = Vector2(100, 100)
+
+[node name="Trampoline" type="StaticBody2D" node_paths=PackedStringArray("collision")]
+physics_material_override = SubResource("PhysicsMaterial_78cu5")
+script = ExtResource("1_h7elp")
+collision = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_jv1jr")
+disabled = true
+
+[node name="Texture" type="Sprite2D" parent="."]
+self_modulate = Color(0.724495, 0.197425, 0, 1)
+texture = ExtResource("2_0vcwi")

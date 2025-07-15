@@ -5,6 +5,8 @@ var end := Vector2(0, 0)
 var size : float
 var ID : int
 
+const minSize = 100.0
+
 var drawing = true
 
 @export var collision : CollisionShape2D
@@ -35,11 +37,14 @@ func update(current : Vector2) -> void:
 	$Texture.rotation = start.angle_to_point(end)
 	$Texture.scale.x = size / $Texture.texture.get_width()
 	$Texture.scale.y = size / $Texture.texture.get_height() / 10
-
+	
 func lock() -> void:
 	drawing = false
 	$CollisionShape2D.disabled = false
 	$Texture.self_modulate = Color.WHITE
+	
+	if size < minSize:
+		destroy()
 
 func destroy():
 	get_parent().get_parent().removeTrampoline(ID)

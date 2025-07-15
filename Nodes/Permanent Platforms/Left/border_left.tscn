@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://biserbx8miopw"]
+[gd_scene load_steps=3 format=3 uid="uid://biserbx8miopw"]
 
 [ext_resource type="Texture2D" uid="uid://ciix2dly6hhun" path="res://Nodes/Permanent Platforms/Left/left.png" id="1_4o40r"]
+[ext_resource type="Script" path="res://Nodes/Permanent Platforms/Left/border_left.gd" id="1_ydsab"]
 
 [node name="Left Border" type="StaticBody2D"]
+script = ExtResource("1_ydsab")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_4o40r")
@@ -11,3 +13,6 @@ centered = false
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-2, 545)
 polygon = PackedVector2Array(2, 10, 184, 10, 183, 1855, -183, 1856, -190, -545, 2, -545)
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

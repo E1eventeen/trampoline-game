@@ -11,14 +11,12 @@ bounce = 1.0
 radius = 100.0
 
 [node name="Ball" type="Node2D"]
-scale = Vector2(0.75, 0.75)
 script = ExtResource("1_5b6qj")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_w766d")
 contact_monitor = true
 max_contacts_reported = 1
-linear_velocity = Vector2(100, -100)
 linear_damp_mode = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]

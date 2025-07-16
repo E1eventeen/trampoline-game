@@ -17,19 +17,18 @@ var mousePos : Vector2
 var mousePressed := false
 var mouseOrigin : Vector2
 
+const ballScaleVariance := 0.1
+
 func _ready() -> void:
-	generateBall()
-	await get_tree().create_timer(3).timeout
-	generateBall()
-	await get_tree().create_timer(5).timeout
 	generateBall()
 	
 func generateBall():
 	activeBall = Ball.instantiate()
+	activeBall.updateScale(Vector2.ONE * randf_range(1 - ballScaleVariance, 1 + ballScaleVariance))
 	activeBall.connect("passRight", ballPassRight)
 	activeBall.connect("passBottom", ballPassBottom)
 	activeBall.winBoundX = get_viewport().get_visible_rect().size.x
-	activeBall.position = Vector2(200, 200)
+	activeBall.position = Vector2(get_viewport().get_visible_rect().size.x / 2.0, -activeBall.offsetSize)
 	$"Play Layer".add_child(activeBall)
 	
 func _process(delta: float) -> void:
@@ -86,7 +85,7 @@ func _process(delta: float) -> void:
 			getTrampoline().lock()
 	
 	for ball in get_tree().get_nodes_in_group("balls"):
-		if ball.position.x > window_size.x - 165:
+		if ball.position.x > window_size.x - 165 or ball.position.x < 165:
 			ball.apply_central_force(Vector2(100, 0))
 	
 func getTrampoline() -> Node2D:
@@ -108,11 +107,30 @@ func ballPassRight(ball: RigidBody2D):
 	l_score.text = "Score: " + str(score)
 	remove_child(ball)
 	ball.queue_free()
-	generateBall()
 	
 func ballPassBottom(ball: RigidBody2D):
 	score = 0
 	l_score.text = "Score: " + str(score)
-	remove_child(ball)
-	ball.queue_free()
-	generateBall()
+	
+	for killBall in get_tree().get_nodes_in_group("balls"):
+		remove_child(ball)
+		ball.queue_free()
+		ballSpawnAttempt()
+	
+func ballSpawnAttempt() -> void:
+	const ballSpawnLimits = {15:3, 5:2, 0:1}
+	
+	var activeBalls = get_tree().get_nodes_in_group("balls").size()
+	
+	for spawnLimit in ballSpawnLimits:
+		if score >= spawnLimit:
+			if activeBalls < ballSpawnLimits[spawnLimit]:
+				generateBall()
+				$BallSpawnEvent.wait_time = 3
+			else:
+				$BallSpawnEvent.wait_time = 1
+				
+			$BallSpawnEvent.start()
+			return
+			
+	$BallSpawnEvent.start()

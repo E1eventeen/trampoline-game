@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://beigqb3akra46"]
+[gd_scene load_steps=6 format=3 uid="uid://beigqb3akra46"]
 
 [ext_resource type="Texture2D" uid="uid://vj322ys4t3ef" path="res://Nodes/Ball/tempBall.png" id="1_3mjvv"]
 [ext_resource type="Script" path="res://Nodes/Ball/ball_2.gd" id="1_ybbc6"]
+[ext_resource type="AudioStream" uid="uid://dw0nn037aylwc" path="res://Nodes/Trampoline/trimmed.wav" id="3_pe5to"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_irsby"]
 friction = 0.1
@@ -25,5 +26,8 @@ texture = ExtResource("1_3mjvv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_sljq0")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_pe5to")
 
 [connection signal="body_entered" from="." to="." method="collision"]

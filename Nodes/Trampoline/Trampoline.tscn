@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cr7c4qfgt0fet"]
+[gd_scene load_steps=6 format=3 uid="uid://cr7c4qfgt0fet"]
 
 [ext_resource type="Script" path="res://Nodes/Trampoline/trampoline.gd" id="1_h7elp"]
 [ext_resource type="Texture2D" uid="uid://da68udwe562vl" path="res://Nodes/Trampoline/trampoline.png" id="2_0vcwi"]
+[ext_resource type="AudioStream" uid="uid://dw0nn037aylwc" path="res://Nodes/Trampoline/trimmed.wav" id="3_ptj7o"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_78cu5"]
 
@@ -21,3 +22,6 @@ disabled = true
 [node name="Texture" type="Sprite2D" parent="."]
 self_modulate = Color(0.724495, 0.197425, 0, 1)
 texture = ExtResource("2_0vcwi")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ptj7o")

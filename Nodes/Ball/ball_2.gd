@@ -30,6 +30,10 @@ func _process(delta: float) -> void:
 
 func collision(body: Node) -> void:
 	if body is Trampoline:
+		
+		$AudioStreamPlayer.pitch_scale = randf_range(-0.2, 0.2) + 1
+		$AudioStreamPlayer.play()
+		
 		var launchVelocity = minVelocityBounce
 		if body.size < maxSize:
 			launchVelocity += (maxVelocityBounce - minVelocityBounce) * (1.0 - (body.size / maxSize))

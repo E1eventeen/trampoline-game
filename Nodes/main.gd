@@ -29,6 +29,7 @@ func generateBall():
 	activeBall.connect("passBottom", ballPassBottom)
 	activeBall.winBoundX = get_viewport().get_visible_rect().size.x
 	activeBall.position = Vector2(get_viewport().get_visible_rect().size.x / 2.0, -activeBall.offsetSize)
+	activeBall.apply_central_force(Vector2(randi_range(-5000, 5000), 0))
 	$"Play Layer".add_child(activeBall)
 	
 func _process(delta: float) -> void:
@@ -64,6 +65,7 @@ func _process(delta: float) -> void:
 			count += 1
 			
 			$"Play Layer".add_child(newTrampoline)
+			$"Play Layer".move_child(newTrampoline, 0)
 			trampolines.append(newTrampoline)
 			
 	if Input.is_action_pressed("press"):
@@ -85,8 +87,9 @@ func _process(delta: float) -> void:
 			getTrampoline().lock()
 	
 	for ball in get_tree().get_nodes_in_group("balls"):
-		if ball.position.x > window_size.x - 165 or ball.position.x < 165:
-			ball.apply_central_force(Vector2(100, 0))
+		if abs(ball.linear_velocity.x) < 50:
+			if ball.position.x > window_size.x - 165 - ball.offsetSize or ball.position.x < 165 + ball.offsetSize:
+				ball.apply_central_force(Vector2(200, 0))
 	
 func getTrampoline() -> Node2D:
 	for trampoline in trampolines:
@@ -100,6 +103,7 @@ func removeTrampoline(ID: int):
 			trampolines.erase(t)
 			$"Play Layer".remove_child(t)
 			t.queue_free()
+			return
 			
 func ballPassRight(ball: RigidBody2D):
 	b_right.swap()
@@ -118,7 +122,7 @@ func ballPassBottom(ball: RigidBody2D):
 		ballSpawnAttempt()
 	
 func ballSpawnAttempt() -> void:
-	const ballSpawnLimits = {15:3, 5:2, 0:1}
+	const ballSpawnLimits = {30:4, 15:3, 5:2, 0:1}
 	
 	var activeBalls = get_tree().get_nodes_in_group("balls").size()
 	

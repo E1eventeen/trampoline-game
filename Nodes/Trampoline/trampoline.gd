@@ -10,7 +10,10 @@ const specialBounceSize = 200.0
 
 var drawing = true
 
-@export var collision : CollisionShape2D
+@export var collisionLine : CollisionShape2D
+@export var collisionBox : CollisionShape2D
+@export var bumperA : Sprite2D
+@export var bumperB : Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,34 +25,56 @@ func _process(delta: float) -> void:
 	
 func setStart(initial := Vector2(0, 0)) -> void:
 	start = initial
-	collision.shape.a = start
+	collisionLine.shape.a = start
+	bumperA.position = start
+	
+	$Texture.scale.y = $Texture.texture.get_height() / 200.0
+	bumperA.scale = Vector2.ONE * $Texture.scale.y
+	bumperB.scale = Vector2.ONE * $Texture.scale.y
 
 func update(current : Vector2) -> void:
 	drawing = true
-	$Texture.self_modulate = Color.RED
+
 	#$CollisionShape2D.disabled = true
 	
 	end = current
 	size = start.distance_to(end)
 	
-	collision.shape.b = end
+	if size > minSize:
+		$Texture.self_modulate = Color.GRAY
+		$Texture.self_modulate.a = 0.75
+	else:
+		$Texture.self_modulate = Color.LIGHT_GRAY
+		$Texture.self_modulate.a = 0.2
+	
+	collisionLine.shape.b = end
 	
 	$Texture.position = (start + end) / 2.0
 	$Texture.rotation = start.angle_to_point(end)
 	$Texture.scale.x = size / $Texture.texture.get_width()
-	$Texture.scale.y = size / $Texture.texture.get_height() / 5
+	
+	collisionBox.transform = $Texture.transform
+	
+	bumperA.self_modulate = $Texture.self_modulate
+	bumperB.self_modulate = $Texture.self_modulate
+	bumperB.position = current
 	
 func lock() -> void:
 	drawing = false
-	$CollisionShape2D.disabled = false
+	collisionBox.disabled = false
 	
 	if size < specialBounceSize:
 		$Texture.self_modulate = Color.LIGHT_SALMON
 	else:
 		$Texture.self_modulate = Color.WHITE
+		
+	bumperA.self_modulate = $Texture.self_modulate
+	bumperB.self_modulate = $Texture.self_modulate
 	
 	if size < minSize:
 		destroy()
 
 func destroy():
 	get_parent().get_parent().removeTrampoline(ID)
+
+	

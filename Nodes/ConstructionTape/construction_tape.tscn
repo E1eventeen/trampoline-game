@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://btrhu0rghsf5r"]
+
+[ext_resource type="Script" path="res://Nodes/ConstructionTape/construction_tape.gd" id="1_fp8d4"]
+[ext_resource type="Texture2D" uid="uid://cdcmmbcieijdg" path="res://Nodes/ConstructionTape/constructionTape.png" id="1_jpr44"]
+
+[node name="ConstructionTape" type="Node2D"]
+script = ExtResource("1_fp8d4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.5)
+texture = ExtResource("1_jpr44")
+centered = false
+
+[node name="Kill Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Kill Timer" to="." method="_on_kill_timer_timeout"]

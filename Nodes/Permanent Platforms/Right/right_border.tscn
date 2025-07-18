@@ -39,10 +39,10 @@ size = Vector2(177, 455.5)
 size = Vector2(177, 465)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mb2l5"]
-size = Vector2(177.75, 528)
+size = Vector2(1065, 528)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ic3xd"]
-size = Vector2(177, 952)
+size = Vector2(1013, 952)
 
 [node name="Right Border" type="StaticBody2D" node_paths=PackedStringArray("c_top", "c_bottom")]
 script = ExtResource("1_tbplp")
@@ -65,9 +65,9 @@ shape = SubResource("RectangleShape2D_isyr2")
 debug_color = Color(0.615778, 0.439001, 0.802543, 0.42)
 
 [node name="Top Bar" type="CollisionShape2D" parent="."]
-position = Vector2(991.875, 719)
+position = Vector2(1435.5, 719)
 shape = SubResource("RectangleShape2D_mb2l5")
 
 [node name="Bottom Bar" type="CollisionShape2D" parent="."]
-position = Vector2(991.5, 1924)
+position = Vector2(1409.5, 1924)
 shape = SubResource("RectangleShape2D_ic3xd")

@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bg8aaj4ww62vn"]
+[gd_scene load_steps=10 format=3 uid="uid://bg8aaj4ww62vn"]
 
 [ext_resource type="Script" path="res://Nodes/main.gd" id="1_26183"]
 [ext_resource type="PackedScene" uid="uid://cmu7mqokxysoj" path="res://Nodes/Backdrop/background.tscn" id="1_okvra"]
 [ext_resource type="PackedScene" uid="uid://biserbx8miopw" path="res://Nodes/Permanent Platforms/Left/border_left.tscn" id="3_60d7c"]
 [ext_resource type="PackedScene" uid="uid://ckx7qp7cy8p20" path="res://Nodes/Permanent Platforms/Right/right_border.tscn" id="4_8eeq6"]
 [ext_resource type="Theme" uid="uid://ly33masg85fy" path="res://theme.tres" id="6_ahybf"]
+[ext_resource type="PackedScene" uid="uid://iah4rswvsxwx" path="res://Nodes/Mutebutton/mute_button.tscn" id="6_fkvvl"]
 [ext_resource type="PackedScene" uid="uid://btrhu0rghsf5r" path="res://Nodes/ConstructionTape/construction_tape.tscn" id="6_wyqt0"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tic24"]
@@ -44,6 +45,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme = ExtResource("6_ahybf")
 
 [node name="MarginContainer" type="MarginContainer" parent="Play Layer/GUI"]
@@ -60,6 +62,10 @@ layout_mode = 2
 size_flags_vertical = 8
 text = "Score: 0"
 horizontal_alignment = 1
+
+[node name="MuteButton" parent="Play Layer" instance=ExtResource("6_fkvvl")]
+position = Vector2(993, 2317)
+scale = Vector2(0.28743, 0.28743)
 
 [node name="ConstructionTape" parent="." instance=ExtResource("6_wyqt0")]
 position = Vector2(0, 1447)

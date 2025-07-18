@@ -19,6 +19,8 @@ var sparkleBounceSpeed := 10000.0
 signal passRight(sender : RigidBody2D)
 signal passBottom(sender : RigidBody2D)
 
+var muted := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
@@ -44,8 +46,9 @@ func _process(delta: float) -> void:
 func collision(body: Node) -> void:
 	if body is Trampoline:
 		
-		$AudioStreamPlayer.pitch_scale = randf_range(-0.2, 0.2) + 1
-		$AudioStreamPlayer.play()
+		if !muted:
+			$AudioStreamPlayer.pitch_scale = randf_range(-0.2, 0.2) + 1
+			$AudioStreamPlayer.play()
 		
 		var launchVelocity = minVelocityBounce
 		if body.size < maxSize:

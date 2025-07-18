@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://iah4rswvsxwx"]
+
+[ext_resource type="Script" path="res://Nodes/Mutebutton/mute_button.gd" id="1_jftw8"]
+[ext_resource type="Texture2D" uid="uid://da2nnfg8pui5g" path="res://Nodes/Mutebutton/muted.png" id="2_i6fq7"]
+[ext_resource type="Texture2D" uid="uid://dgia7k5vanr17" path="res://Nodes/Mutebutton/playingSound.png" id="3_odbpq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kk4wo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i6fq7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_odbpq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1vd5g"]
+radius = 250.0
+
+[node name="MuteButton" type="Node2D"]
+script = ExtResource("1_jftw8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kk4wo")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_1vd5g")
+
+[node name="FadeTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="timeout" from="FadeTimer" to="." method="_on_fade_timer_timeout"]

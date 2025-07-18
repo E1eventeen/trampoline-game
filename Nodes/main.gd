@@ -87,6 +87,7 @@ func _process(delta: float) -> void:
 			getTrampoline().lock()
 	
 	for ball in get_tree().get_nodes_in_group("balls"):
+		ball.muted = $"Play Layer/MuteButton".muted
 		if abs(ball.linear_velocity.x) < 50:
 			if ball.position.x > window_size.x - 165 - ball.offsetSize or ball.position.x < 165 + ball.offsetSize:
 				ball.apply_central_force(Vector2(200, 0))

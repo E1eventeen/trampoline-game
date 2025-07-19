@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bg8aaj4ww62vn"]
+[gd_scene load_steps=11 format=3 uid="uid://bg8aaj4ww62vn"]
 
 [ext_resource type="Script" path="res://Nodes/main.gd" id="1_26183"]
 [ext_resource type="PackedScene" uid="uid://cmu7mqokxysoj" path="res://Nodes/Backdrop/background.tscn" id="1_okvra"]
 [ext_resource type="PackedScene" uid="uid://biserbx8miopw" path="res://Nodes/Permanent Platforms/Left/border_left.tscn" id="3_60d7c"]
+[ext_resource type="PackedScene" uid="uid://dwji0ku5sv8oh" path="res://Nodes/Forcebox/force_box.tscn" id="3_rstpp"]
 [ext_resource type="PackedScene" uid="uid://ckx7qp7cy8p20" path="res://Nodes/Permanent Platforms/Right/right_border.tscn" id="4_8eeq6"]
 [ext_resource type="Theme" uid="uid://ly33masg85fy" path="res://theme.tres" id="6_ahybf"]
 [ext_resource type="PackedScene" uid="uid://iah4rswvsxwx" path="res://Nodes/Mutebutton/mute_button.tscn" id="6_fkvvl"]
@@ -38,6 +39,14 @@ physics_material_override = SubResource("PhysicsMaterial_tic24")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Play Layer/Roof Collision"]
 shape = SubResource("WorldBoundaryShape2D_mp8fl")
 
+[node name="ForceBox" parent="Play Layer" instance=ExtResource("3_rstpp")]
+scale = Vector2(1.81083, 5.5168)
+force = 250.0
+
+[node name="ForceBox2" parent="Play Layer" instance=ExtResource("3_rstpp")]
+position = Vector2(903, 0)
+scale = Vector2(100, 24)
+
 [node name="GUI" type="Control" parent="Play Layer"]
 layout_mode = 3
 anchors_preset = 15
@@ -47,6 +56,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("6_ahybf")
+metadata/_edit_lock_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Play Layer/GUI"]
 layout_mode = 1
@@ -56,6 +66,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("6_ahybf")
+metadata/_edit_lock_ = true
 
 [node name="Score" type="Label" parent="Play Layer/GUI/MarginContainer"]
 layout_mode = 2

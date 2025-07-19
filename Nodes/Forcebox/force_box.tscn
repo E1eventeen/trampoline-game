@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwji0ku5sv8oh"]
+
+[ext_resource type="Script" path="res://Nodes/Forcebox/force_box.gd" id="1_4rji2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yodh6"]
+size = Vector2(100, 100)
+
+[node name="ForceBox" type="Area2D"]
+collision_mask = 2
+input_pickable = false
+script = ExtResource("1_4rji2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(50, 50)
+shape = SubResource("RectangleShape2D_yodh6")
+debug_color = Color(1, 0, 0.0881122, 0.42)
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
+[connection signal="body_shape_exited" from="." to="." method="_on_body_shape_exited"]

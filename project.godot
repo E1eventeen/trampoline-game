@@ -39,6 +39,10 @@ press={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_2="Balls"
+
 [physics]
 
 2d/default_gravity=400.0

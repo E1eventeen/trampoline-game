@@ -38,6 +38,7 @@ func _process(delta: float) -> void:
 	
 	var window_size = get_viewport().get_visible_rect().size
 	b_right.position.x = window_size.x - 1080
+	$"Play Layer/ForceBox2".position.x = window_size.x - 177
 		
 	if Input.is_action_just_pressed("press"):
 		if !mousePressed:
@@ -88,6 +89,9 @@ func _process(delta: float) -> void:
 	
 	for ball in get_tree().get_nodes_in_group("balls"):
 		ball.muted = $"Play Layer/MuteButton".muted
+		
+		continue
+		
 		if abs(ball.linear_velocity.x) < 50:
 			if ball.position.x > window_size.x - 165 - ball.offsetSize or ball.position.x < 165 + ball.offsetSize:
 				ball.apply_central_force(Vector2(200, 0))

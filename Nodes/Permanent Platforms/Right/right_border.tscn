@@ -57,12 +57,10 @@ centered = false
 [node name="Top Opening" type="CollisionShape2D" parent="."]
 position = Vector2(991.5, 227.75)
 shape = SubResource("RectangleShape2D_51wu5")
-debug_color = Color(0.615778, 0.439001, 0.802543, 0.42)
 
 [node name="Bottom Opening" type="CollisionShape2D" parent="."]
 position = Vector2(991.5, 1215.5)
 shape = SubResource("RectangleShape2D_isyr2")
-debug_color = Color(0.615778, 0.439001, 0.802543, 0.42)
 
 [node name="Top Bar" type="CollisionShape2D" parent="."]
 position = Vector2(1435.5, 719)

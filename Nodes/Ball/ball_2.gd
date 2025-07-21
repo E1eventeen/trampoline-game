@@ -23,7 +23,7 @@ var muted := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	$Sprite2D.frame = randi() % $Sprite2D.sprite_frames.get_frame_count("default")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -1,42 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://ckx7qp7cy8p20"]
+[gd_scene load_steps=11 format=3 uid="uid://ckx7qp7cy8p20"]
 
-[ext_resource type="Texture2D" uid="uid://cxvmjt4ih3kx4" path="res://Nodes/Permanent Platforms/Right/right_bottom.png" id="1_71yfm"]
 [ext_resource type="Script" path="res://Nodes/Permanent Platforms/Right/right_border.gd" id="1_tbplp"]
+[ext_resource type="Texture2D" uid="uid://dsfsugdycv8a3" path="res://Nodes/Permanent Platforms/Right/glowparticle.png" id="2_drpqw"]
 [ext_resource type="Texture2D" uid="uid://c3har5h7x6edd" path="res://Nodes/Permanent Platforms/Right/right_empty.png" id="2_nphsg"]
-[ext_resource type="Texture2D" uid="uid://bcbx6g3wvekjn" path="res://Nodes/Permanent Platforms/Right/right_top.png" id="3_ok6sj"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_n7oyf"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_71yfm")
-}],
-"loop": true,
-"name": &"bottom",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_nphsg")
-}],
-"loop": true,
-"name": &"empty",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_ok6sj")
-}],
-"loop": true,
-"name": &"top",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_51wu5"]
-size = Vector2(177, 455.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_isyr2"]
-size = Vector2(177, 465)
+[ext_resource type="Texture2D" uid="uid://hqya5au1vnry" path="res://Nodes/Permanent Platforms/Right/door.png" id="3_g5gtp"]
+[ext_resource type="Texture2D" uid="uid://cwnt5yw64j7i1" path="res://Nodes/Permanent Platforms/Right/glow.png" id="3_lb3x0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mb2l5"]
 size = Vector2(1065, 528)
@@ -44,23 +12,24 @@ size = Vector2(1065, 528)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ic3xd"]
 size = Vector2(1013, 952)
 
-[node name="Right Border" type="StaticBody2D" node_paths=PackedStringArray("c_top", "c_bottom")]
+[sub_resource type="Gradient" id="Gradient_qed62"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_isyr2"]
+size = Vector2(494, 465)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51wu5"]
+size = Vector2(502, 455.5)
+
+[node name="Right Border" type="AnimatableBody2D" node_paths=PackedStringArray("b_top", "b_bottom", "particle")]
 script = ExtResource("1_tbplp")
-c_top = NodePath("Top Opening")
-c_bottom = NodePath("Bottom Opening")
+b_top = NodePath("door_t")
+b_bottom = NodePath("door_b")
+particle = NodePath("CPUParticles2D")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_n7oyf")
-animation = &"bottom"
-centered = false
-
-[node name="Top Opening" type="CollisionShape2D" parent="."]
-position = Vector2(991.5, 227.75)
-shape = SubResource("RectangleShape2D_51wu5")
-
-[node name="Bottom Opening" type="CollisionShape2D" parent="."]
-position = Vector2(991.5, 1215.5)
-shape = SubResource("RectangleShape2D_isyr2")
+[node name="SwapTimer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
 
 [node name="Top Bar" type="CollisionShape2D" parent="."]
 position = Vector2(1435.5, 719)
@@ -69,3 +38,64 @@ shape = SubResource("RectangleShape2D_mb2l5")
 [node name="Bottom Bar" type="CollisionShape2D" parent="."]
 position = Vector2(1409.5, 1924)
 shape = SubResource("RectangleShape2D_ic3xd")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(1081, 500)
+amount = 16
+lifetime = 2.0
+texture = ExtResource("2_drpqw")
+emission_shape = 4
+emission_points = PackedVector2Array(0, 0, 0, 50, 0, 100, 0, 150, 0, 200, 0, 250, 0, 300, 0, 350, 0, 400, 0, 450)
+emission_colors = PackedColorArray()
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.5
+initial_velocity_max = 90.0
+angular_velocity_min = -20.0
+angular_velocity_max = 20.0
+linear_accel_min = -43.78
+linear_accel_max = -24.24
+scale_amount_max = 1.5
+color = Color(1, 1, 0, 1)
+color_ramp = SubResource("Gradient_qed62")
+
+[node name="glow_b" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.449)
+position = Vector2(589, 980)
+texture = ExtResource("3_lb3x0")
+centered = false
+
+[node name="glow_t" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.449)
+position = Vector2(589, -22)
+texture = ExtResource("3_lb3x0")
+centered = false
+
+[node name="door_b" type="AnimatableBody2D" parent="."]
+position = Vector2(1080, 983)
+
+[node name="BottomDoor" type="Sprite2D" parent="door_b"]
+texture = ExtResource("3_g5gtp")
+centered = false
+
+[node name="Bottom Opening" type="CollisionShape2D" parent="door_b"]
+position = Vector2(247, 232)
+shape = SubResource("RectangleShape2D_isyr2")
+
+[node name="door_t" type="AnimatableBody2D" parent="."]
+position = Vector2(1080, 0)
+
+[node name="TopDoor" type="Sprite2D" parent="door_t"]
+position = Vector2(0, -21)
+texture = ExtResource("3_g5gtp")
+centered = false
+
+[node name="Top Opening" type="CollisionShape2D" parent="door_t"]
+position = Vector2(251, 227)
+shape = SubResource("RectangleShape2D_51wu5")
+
+[node name="Back" type="Sprite2D" parent="."]
+texture = ExtResource("2_nphsg")
+centered = false
+
+[connection signal="timeout" from="SwapTimer" to="." method="_on_swap_timer_timeout"]

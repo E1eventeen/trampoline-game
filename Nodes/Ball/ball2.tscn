@@ -1,9 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://beigqb3akra46"]
+[gd_scene load_steps=16 format=3 uid="uid://beigqb3akra46"]
 
-[ext_resource type="Texture2D" uid="uid://vj322ys4t3ef" path="res://Nodes/Ball/tempBall.png" id="1_3mjvv"]
 [ext_resource type="Script" path="res://Nodes/Ball/ball_2.gd" id="1_ybbc6"]
-[ext_resource type="Texture2D" uid="uid://b0p5kywc4wxn1" path="res://Nodes/Ball/star_particle.png" id="2_tu8c1"]
+[ext_resource type="Texture2D" uid="uid://ccnqxmso01fld" path="res://Nodes/Ball/star_particle.png" id="2_tu8c1"]
+[ext_resource type="Texture2D" uid="uid://dgnw6302ba5ql" path="res://Nodes/Ball/Textures/baseball.png" id="3_fi04o"]
+[ext_resource type="Texture2D" uid="uid://c7kbkk3mgd3nh" path="res://Nodes/Ball/Textures/basketball.png" id="4_0xpv1"]
 [ext_resource type="AudioStream" uid="uid://spccaev0lo4y" path="res://Nodes/Trampoline/trimmed.ogg" id="4_ru5mm"]
+[ext_resource type="Texture2D" uid="uid://bepwx3g1nfspl" path="res://Nodes/Ball/Textures/colonthree.png" id="5_3ba76"]
+[ext_resource type="Texture2D" uid="uid://b155woyschhdv" path="res://Nodes/Ball/Textures/eyeball.png" id="6_behvt"]
+[ext_resource type="Texture2D" uid="uid://cmd6xa6tjblca" path="res://Nodes/Ball/Textures/luxo.png" id="7_4rfbm"]
+[ext_resource type="Texture2D" uid="uid://dykxrubnsa28e" path="res://Nodes/Ball/Textures/yimyang.png" id="8_wccle"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_irsby"]
 friction = 0.1
@@ -32,6 +37,32 @@ color_ramp = SubResource("GradientTexture1D_1oauk")
 hue_variation_min = -2.23517e-08
 hue_variation_max = 1.0
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_5mopf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_fi04o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0xpv1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3ba76")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_behvt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4rfbm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_wccle")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_sljq0"]
 resource_local_to_scene = true
 radius = 100.0
@@ -52,8 +83,8 @@ amount = 50
 process_material = SubResource("ParticleProcessMaterial_rva18")
 texture = ExtResource("2_tu8c1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_3mjvv")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5mopf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_sljq0")

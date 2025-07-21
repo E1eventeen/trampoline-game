@@ -90,8 +90,12 @@ func _process(delta: float) -> void:
 	for ball in get_tree().get_nodes_in_group("balls"):
 		ball.muted = $"Play Layer/MuteButton".muted
 		
-		continue
+		if Input.is_action_pressed("middle"):
+			ball.linear_velocity = Vector2(0, 0)
+			ball.position = mousePos
 		
+		continue
+		print("N")
 		if abs(ball.linear_velocity.x) < 50:
 			if ball.position.x > window_size.x - 165 - ball.offsetSize or ball.position.x < 165 + ball.offsetSize:
 				ball.apply_central_force(Vector2(200, 0))
@@ -111,7 +115,6 @@ func removeTrampoline(ID: int):
 			return
 			
 func ballPassRight(ball: RigidBody2D):
-	b_right.swap()
 	score += 1
 	l_score.text = "Score: " + str(score)
 	remove_child(ball)
@@ -143,3 +146,4 @@ func ballSpawnAttempt() -> void:
 			return
 			
 	$BallSpawnEvent.start()
+	

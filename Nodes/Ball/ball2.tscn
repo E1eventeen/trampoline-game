@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://beigqb3akra46"]
+[gd_scene load_steps=24 format=3 uid="uid://beigqb3akra46"]
 
 [ext_resource type="Script" path="res://Nodes/Ball/ball_2.gd" id="1_ybbc6"]
 [ext_resource type="Texture2D" uid="uid://ccnqxmso01fld" path="res://Nodes/Ball/star_particle.png" id="2_tu8c1"]
@@ -9,6 +9,14 @@
 [ext_resource type="Texture2D" uid="uid://b155woyschhdv" path="res://Nodes/Ball/Textures/eyeball.png" id="6_behvt"]
 [ext_resource type="Texture2D" uid="uid://cmd6xa6tjblca" path="res://Nodes/Ball/Textures/luxo.png" id="7_4rfbm"]
 [ext_resource type="Texture2D" uid="uid://dykxrubnsa28e" path="res://Nodes/Ball/Textures/yimyang.png" id="8_wccle"]
+[ext_resource type="Texture2D" uid="uid://df7okfuo2owvb" path="res://Nodes/Ball/Textures/kirby.png" id="9_iamtq"]
+[ext_resource type="Texture2D" uid="uid://7mtnu4rwopo3" path="res://Nodes/Ball/Textures/max.png" id="10_06fnq"]
+[ext_resource type="Texture2D" uid="uid://dwca1ocf7akl5" path="res://Nodes/Ball/Textures/pokeball.png" id="11_2c7nx"]
+[ext_resource type="Texture2D" uid="uid://bbifk8j8vc3jf" path="res://Nodes/Ball/Textures/rainbow.png" id="12_8lrx6"]
+[ext_resource type="Texture2D" uid="uid://byp1756jv35h5" path="res://Nodes/Ball/Textures/pacman.png" id="13_ckkno"]
+[ext_resource type="Texture2D" uid="uid://miscpnv74rsk" path="res://Nodes/Ball/Textures/pizza.png" id="14_n207v"]
+[ext_resource type="Texture2D" uid="uid://c7a5einrrfjy7" path="res://Nodes/Ball/Textures/ring.png" id="15_s20r4"]
+[ext_resource type="Texture2D" uid="uid://br7d1t0fdbdyo" path="res://Nodes/Ball/Textures/texturenotfound.png" id="16_obbb1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_irsby"]
 friction = 0.1
@@ -57,6 +65,30 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("8_wccle")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_iamtq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_06fnq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_2c7nx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_8lrx6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ckkno")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_n207v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_s20r4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_obbb1")
 }],
 "loop": true,
 "name": &"default",

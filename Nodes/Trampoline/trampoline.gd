@@ -8,7 +8,9 @@ var ID : int
 const minSize = 100.0
 const specialBounceSize = 200.0
 
-var drawing = true
+var drawing := true
+var falling := false
+var vY := 100.0
 
 @export var collisionLine : CollisionShape2D
 @export var collisionBox : CollisionShape2D
@@ -21,7 +23,17 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if falling:
+		$Texture.self_modulate.a -= delta
+		
+		bumperA.self_modulate = $Texture.self_modulate
+		bumperB.self_modulate = $Texture.self_modulate
+		
+		position.y += delta * vY
+		vY += delta * 300.0
+		
+		if $Texture.self_modulate.a <= 0.0:
+			queue_free()
 	
 func setStart(initial := Vector2(0, 0)) -> void:
 	start = initial
@@ -74,7 +86,13 @@ func lock() -> void:
 	if size < minSize:
 		destroy()
 
-func destroy():
-	get_parent().get_parent().removeTrampoline(ID)
-
+func destroy(broken := false):
+	set_collision_layer_value(1, false)
+	set_collision_mask_value(1, false)
+	
+	get_parent().get_parent().destroyTrampoline(self)
+	if broken:
+		falling = true
+	else:
+		queue_free()
 	

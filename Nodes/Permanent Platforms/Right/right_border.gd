@@ -26,13 +26,11 @@ func _process(delta: float) -> void:
 		if b_bottom.position.x > left:
 			b_bottom.position.x -= speed * delta
 			b_bottom.get_child(1).disabled = false
-
 	else:
 		particle.position.y = 956
 		
 		if b_top.position.x > left:
 			b_top.position.x -= speed * delta
-		else:
 			b_top.get_child(1).disabled = false
 		if b_bottom.position.x < right:
 			b_bottom.position.x += speed * delta

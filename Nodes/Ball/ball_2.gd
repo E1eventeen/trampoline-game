@@ -19,11 +19,21 @@ var sparkleBounceSpeed := 10000.0
 signal passRight(sender : RigidBody2D)
 signal passBottom(sender : RigidBody2D)
 
-var muted := false
+var spriteCount : int
+var sprite := -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Sprite2D.frame = randi() % $Sprite2D.sprite_frames.get_frame_count("default")
+	pass
+	
+func getFrameCount() -> int:
+	spriteCount = $Sprite2D.sprite_frames.get_frame_count("default")
+	return spriteCount
+	
+func setTexture(frame: int) -> void:
+	spriteCount = $Sprite2D.sprite_frames.get_frame_count("default")
+	sprite = frame % spriteCount
+	$Sprite2D.frame = sprite
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -46,9 +56,8 @@ func _process(delta: float) -> void:
 func collision(body: Node) -> void:
 	if body is Trampoline:
 		
-		if !muted:
-			$AudioStreamPlayer.pitch_scale = randf_range(-0.2, 0.2) + 1
-			$AudioStreamPlayer.play()
+		$AudioStreamPlayer.pitch_scale = randf_range(-0.2, 0.2) + 1
+		$AudioStreamPlayer.play()
 		
 		var launchVelocity = minVelocityBounce
 		if body.size < maxSize:
@@ -74,7 +83,7 @@ func collision(body: Node) -> void:
 			sparkleBounceSpeed = linear_velocity.length()
 			#print(sparkleBounceSpeed)
 	
-		body.destroy()
+		body.destroy(true)
 		
 
 func updateScale(newScale := Vector2.ONE):

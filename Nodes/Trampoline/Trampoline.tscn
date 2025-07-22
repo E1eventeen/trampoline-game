@@ -1,24 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cr7c4qfgt0fet"]
+[gd_scene load_steps=8 format=3 uid="uid://cr7c4qfgt0fet"]
 
 [ext_resource type="Script" path="res://Nodes/Trampoline/trampoline.gd" id="1_h7elp"]
 [ext_resource type="Texture2D" uid="uid://da68udwe562vl" path="res://Nodes/Trampoline/trampoline.png" id="2_0vcwi"]
 [ext_resource type="Texture2D" uid="uid://cb654q52gvu3n" path="res://Nodes/Trampoline/bumper.png" id="3_6j3fi"]
 [ext_resource type="AudioStream" uid="uid://dw0nn037aylwc" path="res://Nodes/Trampoline/trimmed.wav" id="3_ptj7o"]
-[ext_resource type="Texture2D" uid="uid://beduosp8pgovl" path="res://Nodes/Trampoline/deathParticle.png" id="5_dc18b"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_78cu5"]
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qgjep"]
-particle_flag_disable_z = true
-emission_shape_scale = Vector3(250, 0, 0)
-emission_shape = 3
-emission_box_extents = Vector3(1, 1, 1)
-spread = 180.0
-initial_velocity_min = 50.0
-initial_velocity_max = 50.0
-angular_velocity_min = -1.60933e-05
-angular_velocity_max = 360.0
-gravity = Vector3(0, 98, 0)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_jv1jr"]
 resource_local_to_scene = true
@@ -45,12 +32,6 @@ texture = ExtResource("3_6j3fi")
 
 [node name="Texture" type="Sprite2D" parent="."]
 texture = ExtResource("2_0vcwi")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-emitting = false
-amount = 3000
-process_material = SubResource("ParticleProcessMaterial_qgjep")
-texture = ExtResource("5_dc18b")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ptj7o")

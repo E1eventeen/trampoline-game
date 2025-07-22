@@ -19,6 +19,8 @@ var mouseOrigin : Vector2
 
 const ballScaleVariance := 0.1
 
+var ballQueue := []
+
 func _ready() -> void:
 	generateBall()
 	
@@ -30,6 +32,25 @@ func generateBall():
 	activeBall.winBoundX = get_viewport().get_visible_rect().size.x
 	activeBall.position = Vector2(get_viewport().get_visible_rect().size.x / 2.0, -activeBall.offsetSize)
 	activeBall.apply_central_force(Vector2(randi_range(-5000, 5000), 0))
+	
+	activeBall.rotation = deg_to_rad(randi() * 360.0)
+	activeBall.angular_velocity = randf_range(-1, 1)
+	
+	if ballQueue.is_empty():
+		for i in range(activeBall.getFrameCount()):
+			ballQueue.append(i)
+		ballQueue.shuffle()
+		
+	if len(ballQueue) == 1:
+		for i in range(activeBall.getFrameCount()):
+			ballQueue.append(i)
+		if ballQueue[0] == ballQueue[1]:
+			var temp = ballQueue[1]
+			ballQueue[1] = ballQueue[2]
+			ballQueue[2] = temp
+	
+	activeBall.setTexture(ballQueue.pop_front())
+	
 	$"Play Layer".add_child(activeBall)
 	
 func _process(delta: float) -> void:
@@ -46,7 +67,7 @@ func _process(delta: float) -> void:
 			mouseOrigin = mousePos
 			
 			if trampolines.size() >= trampolineLimit:
-				removeTrampoline(trampolines[0].ID)
+				trampolines[0].destroy()
 				
 			var newTrampoline = load("res://Nodes/Trampoline/Trampoline.tscn").instantiate()
 			
@@ -88,8 +109,6 @@ func _process(delta: float) -> void:
 			getTrampoline().lock()
 	
 	for ball in get_tree().get_nodes_in_group("balls"):
-		ball.muted = $"Play Layer/MuteButton".muted
-		
 		if Input.is_action_pressed("middle"):
 			ball.linear_velocity = Vector2(0, 0)
 			ball.position = mousePos
@@ -106,13 +125,8 @@ func getTrampoline() -> Node2D:
 			return trampoline
 	return null
 
-func removeTrampoline(ID: int):
-	for t in trampolines:
-		if t.ID == ID:
-			trampolines.erase(t)
-			$"Play Layer".remove_child(t)
-			t.queue_free()
-			return
+func destroyTrampoline(trampoline):
+	trampolines.erase(trampoline)
 			
 func ballPassRight(ball: RigidBody2D):
 	score += 1

@@ -20,6 +20,11 @@ func _process(delta: float) -> void:
 			modulate.a = 1
 			$FadeTimer.start()
 			
+			if muted:
+				AudioServer.set_bus_mute(0, true)
+			else:
+				AudioServer.set_bus_mute(0, false)
+			
 	if fading and modulate.a > 0.25:
 		modulate.a -= delta / 4
 			

@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgq5uhkcfnsc7"]
+
+[ext_resource type="Theme" uid="uid://ly33masg85fy" path="res://theme.tres" id="1_57pq4"]
+[ext_resource type="Script" path="res://Nodes/TitleScreen/title_screen.gd" id="2_mmfg8"]
+[ext_resource type="Texture2D" uid="uid://ggnakxhmlgx5" path="res://Nodes/TitleScreen/logo.png" id="2_w0h05"]
+[ext_resource type="Texture2D" uid="uid://dnvrk8jimky06" path="res://Nodes/TitleScreen/startbutton.png" id="4_r8ww5"]
+[ext_resource type="Texture2D" uid="uid://boj30d8skcc7x" path="res://Nodes/TitleScreen/startbutton_pressed.png" id="5_mvt8l"]
+
+[node name="Title Screen" type="Control" node_paths=PackedStringArray("Logo", "StartButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_57pq4")
+script = ExtResource("2_mmfg8")
+Logo = NodePath("VBoxContainer/Control/Logo")
+StartButton = NodePath("VBoxContainer/Control2/StartButton")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(1080, 1080)
+layout_mode = 2
+
+[node name="Logo" type="TextureRect" parent="VBoxContainer/Control"]
+layout_mode = 2
+offset_right = 1080.0
+offset_bottom = 1080.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("2_w0h05")
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 160
+
+[node name="Control2" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="TextureButton" parent="VBoxContainer/Control2"]
+layout_mode = 2
+offset_top = 4.0
+offset_right = 1080.0
+offset_bottom = 274.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_57pq4")
+texture_normal = ExtResource("4_r8ww5")
+texture_pressed = ExtResource("5_mvt8l")
+
+[connection signal="button_up" from="VBoxContainer/Control2/StartButton" to="." method="_on_start_button_button_up"]

@@ -21,8 +21,17 @@ const ballScaleVariance := 0.1
 
 var ballQueue := []
 
+var gameState = "title"
+
 func _ready() -> void:
-	generateBall()
+	pass
+	
+func play() -> void:
+	gameState = "playing"
+	$"Title Layer".visible = false
+	print("g")
+	$BallSpawnEvent.start()
+	
 	
 func generateBall():
 	activeBall = Ball.instantiate()

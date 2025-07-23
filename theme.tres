@@ -3,6 +3,7 @@
 [sub_resource type="FontVariation" id="FontVariation_0ry5c"]
 
 [resource]
+Button/icons/icon = null
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 40

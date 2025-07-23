@@ -72,7 +72,7 @@ texture = ExtResource("3_lb3x0")
 centered = false
 
 [node name="door_b" type="AnimatableBody2D" parent="."]
-position = Vector2(1080, 983)
+position = Vector2(903, 983)
 
 [node name="BottomDoor" type="Sprite2D" parent="door_b"]
 texture = ExtResource("3_g5gtp")

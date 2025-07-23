@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bg8aaj4ww62vn"]
+[gd_scene load_steps=12 format=3 uid="uid://bg8aaj4ww62vn"]
 
 [ext_resource type="Script" path="res://Nodes/main.gd" id="1_26183"]
 [ext_resource type="PackedScene" uid="uid://cmu7mqokxysoj" path="res://Nodes/Backdrop/background.tscn" id="1_okvra"]
@@ -8,6 +8,7 @@
 [ext_resource type="Theme" uid="uid://ly33masg85fy" path="res://theme.tres" id="6_ahybf"]
 [ext_resource type="PackedScene" uid="uid://iah4rswvsxwx" path="res://Nodes/Mutebutton/mute_button.tscn" id="6_fkvvl"]
 [ext_resource type="PackedScene" uid="uid://btrhu0rghsf5r" path="res://Nodes/ConstructionTape/construction_tape.tscn" id="6_wyqt0"]
+[ext_resource type="PackedScene" uid="uid://dgq5uhkcfnsc7" path="res://Nodes/TitleScreen/TitleScreen.tscn" id="9_kdel4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tic24"]
 
@@ -24,7 +25,6 @@ l_score = NodePath("Play Layer/GUI/MarginContainer/Score")
 
 [node name="BallSpawnEvent" type="Timer" parent="."]
 one_shot = true
-autostart = true
 
 [node name="Play Layer" type="CanvasLayer" parent="."]
 
@@ -81,5 +81,9 @@ scale = Vector2(0.28743, 0.28743)
 
 [node name="ConstructionTape" parent="." instance=ExtResource("6_wyqt0")]
 position = Vector2(0, 1447)
+
+[node name="Title Layer" type="CanvasLayer" parent="."]
+
+[node name="Title Screen" parent="Title Layer" instance=ExtResource("9_kdel4")]
 
 [connection signal="timeout" from="BallSpawnEvent" to="." method="ballSpawnAttempt"]
